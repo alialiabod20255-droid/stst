@@ -127,7 +127,7 @@ class ProfilePage extends StatelessWidget {
                         icon: Icons.notifications_outlined,
                         title: l10n.notifications,
                         onTap: () {
-                          Navigator.pushNamed(context, '/notification-settings');
+                          Navigator.pushNamed(context, AppConfig.notificationSettingsRoute);
                         },
                       ),
                       Consumer<LocaleProvider>(
@@ -146,14 +146,14 @@ class ProfilePage extends StatelessWidget {
                         icon: Icons.help_outline,
                         title: 'المساعدة والدعم',
                         onTap: () {
-                          Navigator.pushNamed(context, '/help');
+                          Navigator.pushNamed(context, AppConfig.helpRoute);
                         },
                       ),
                       ProfileMenuItem(
                         icon: Icons.info_outline,
                         title: 'حول التطبيق',
                         onTap: () {
-                          Navigator.pushNamed(context, '/about');
+                          Navigator.pushNamed(context, AppConfig.aboutRoute);
                         },
                       ),
 

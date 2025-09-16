@@ -240,7 +240,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     onTap: () {
                                       Navigator.pushNamed(
                                         context,
-                                        '/products',
+                                        AppConfig.productsListRoute,
                                         arguments: {'category': category['name']},
                                       );
                                     },
@@ -268,7 +268,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/products');
+                                Navigator.pushNamed(context, AppConfig.productsListRoute);
                               },
                               child: Text(
                                 'عرض الكل',

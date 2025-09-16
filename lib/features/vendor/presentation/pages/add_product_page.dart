@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
 
 import '../../../../core/theme/app_theme.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
@@ -26,6 +29,8 @@ class _AddProductPageState extends State<AddProductPage> {
   List<String> _sizes = [];
   List<String> _colors = [];
   List<String> _tags = [];
+  final ImagePicker _picker = ImagePicker();
+  bool _isUploadingImages = false;
 
   final List<String> _categories = [
     'باقات الحب',
@@ -59,6 +64,51 @@ class _AddProductPageState extends State<AddProductPage> {
     _stockController.dispose();
     _discountController.dispose();
     super.dispose();
+  }
+
+  Future<void> _pickImages() async {
+    try {
+      final List<XFile> pickedFiles = await _picker.pickMultiImage();
+      if (pickedFiles.isNotEmpty) {
+        setState(() {
+          _isUploadingImages = true;
+        });
+
+        for (final file in pickedFiles) {
+          final imageUrl = await _uploadImage(file);
+          if (imageUrl != null) {
+            setState(() {
+              _images.add(imageUrl);
+            });
+          }
+        }
+
+        setState(() {
+          _isUploadingImages = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _isUploadingImages = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('فشل في اختيار الصور')),
+      );
+    }
+  }
+
+  Future<String?> _uploadImage(XFile file) async {
+    try {
+      final String fileName = 'products/${DateTime.now().millisecondsSinceEpoch}_${file.name}';
+      final Reference ref = FirebaseStorage.instance.ref().child(fileName);
+      
+      final UploadTask uploadTask = ref.putFile(File(file.path));
+      final TaskSnapshot snapshot = await uploadTask;
+      
+      return await snapshot.ref.getDownloadURL();
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<void> _addProduct() async {
@@ -168,15 +218,16 @@ class _AddProductPageState extends State<AddProductPage> {
                               ),
                               const SizedBox(height: 4),
                               TextButton(
-                                onPressed: () {
-                                  // Add default image for demo
-                                  setState(() {
-                                    _images.add('https://images.pexels.com/photos/1070850/pexels-photo-1070850.jpeg');
-                                  });
-                                },
-                                child: const Text('إضافة صورة تجريبية'),
+                            if (_isUploadingImages)
+                              CircularProgressIndicator(
+                                color: AppTheme.primaryPink,
+                              )
+                            else
+                              ElevatedButton.icon(
+                                onPressed: _pickImages,
+                                icon: const Icon(Icons.photo_library),
+                                label: const Text('اختيار من المعرض'),
                               ),
-                            ],
                           ),
                         ),
                       )
@@ -192,15 +243,16 @@ class _AddProductPageState extends State<AddProductPage> {
                                 border: Border.all(color: Colors.grey.withOpacity(0.3)),
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              child: IconButton(
-                                onPressed: () {
-                                  // Add more images
-                                  setState(() {
-                                    _images.add('https://images.pexels.com/photos/1022385/pexels-photo-1022385.jpeg');
-                                  });
-                                },
-                                icon: const Icon(Icons.add),
-                              ),
+                              child: _isUploadingImages
+                                  ? Center(
+                                      child: CircularProgressIndicator(
+                                        color: AppTheme.primaryPink,
+                                      ),
+                                    )
+                                  : IconButton(
+                                      onPressed: _pickImages,
+                                      icon: const Icon(Icons.add),
+                                    ),
                             );
                           }
                           return Container(

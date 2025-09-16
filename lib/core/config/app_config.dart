@@ -69,6 +69,12 @@ class AppConfig {
   static const String vendorDashboardRoute = '/vendor-dashboard';
   static const String addProductRoute = '/add-product';
   static const String manageProductsRoute = '/manage-products';
+  static const String vendorOrdersRoute = '/vendor-orders';
+  static const String vendorAnalyticsRoute = '/vendor-analytics';
+  static const String aboutRoute = '/about';
+  static const String helpRoute = '/help';
+  static const String notificationSettingsRoute = '/notification-settings';
+  static const String ticketDetailsRoute = '/ticket-details';
   
   // Generate routes
   static Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -134,6 +140,19 @@ class AppConfig {
         return _createRoute(const AddProductPage());
       case manageProductsRoute:
         return _createRoute(const ManageProductsPage());
+      case vendorOrdersRoute:
+        return _createRoute(const VendorOrdersPage());
+      case vendorAnalyticsRoute:
+        return _createRoute(const VendorAnalyticsPage());
+      case aboutRoute:
+        return _createRoute(const AboutPage());
+      case helpRoute:
+        return _createRoute(const HelpPage());
+      case notificationSettingsRoute:
+        return _createRoute(const NotificationSettingsPage());
+      case ticketDetailsRoute:
+        final args = settings.arguments as Map<String, dynamic>?;
+        return _createRoute(TicketDetailsPage(ticketId: args?['ticketId'] ?? ''));
       default:
         return null;
     }

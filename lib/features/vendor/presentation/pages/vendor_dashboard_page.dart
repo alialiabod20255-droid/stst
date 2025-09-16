@@ -174,7 +174,7 @@ class _VendorDashboardPageState extends State<VendorDashboardPage> {
                                 Icons.list_alt_outlined,
                                 Colors.blue,
                                 () {
-                                  Navigator.pushNamed(context, '/vendor-orders');
+                                  Navigator.pushNamed(context, AppConfig.vendorOrdersRoute);
                                 },
                               ),
                             ),
@@ -186,7 +186,7 @@ class _VendorDashboardPageState extends State<VendorDashboardPage> {
                                 Icons.analytics_outlined,
                                 Colors.orange,
                                 () {
-                                  Navigator.pushNamed(context, '/vendor-analytics');
+                                  Navigator.pushNamed(context, AppConfig.vendorAnalyticsRoute);
                                 },
                               ),
                             ),
@@ -215,7 +215,7 @@ class _VendorDashboardPageState extends State<VendorDashboardPage> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/vendor-orders');
+                                Navigator.pushNamed(context, AppConfig.vendorOrdersRoute);
                               },
                               child: Text(
                                 'عرض الكل',

@@ -262,7 +262,7 @@ class _SupportPageState extends State<SupportPage> {
                       onTap: () {
                         Navigator.pushNamed(
                           context,
-                          '/ticket-details',
+                          AppConfig.ticketDetailsRoute,
                           arguments: {'ticketId': ticket.id},
                         );
                       },
