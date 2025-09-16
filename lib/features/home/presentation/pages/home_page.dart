@@ -96,9 +96,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
-    await productsProvider.loadProducts();
+    // Load products without triggering setState during build
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await productsProvider.loadProducts();
+    });
+    
     if (authProvider.isAuthenticated) {
-      await cartProvider.loadCart(authProvider.currentUser!.id);
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await cartProvider.loadCart(authProvider.currentUser!.id);
+      });
     }
   }
 

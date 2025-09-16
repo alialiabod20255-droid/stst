@@ -131,7 +131,7 @@ class _SupportPageState extends State<SupportPage> {
                   child: _buildContactCard(
                     icon: Icons.phone,
                     title: 'اتصال هاتفي',
-                    subtitle: '+966 50 123 4567',
+                    subtitle: '778447779',
                     color: Colors.green,
                     onTap: () async {
                       final Uri phoneUri = Uri(scheme: 'tel', path: '+966501234567');
@@ -152,7 +152,7 @@ class _SupportPageState extends State<SupportPage> {
                   child: _buildContactCard(
                     icon: Icons.email_outlined,
                     title: 'البريد الإلكتروني',
-                    subtitle: 'support@roses.com',
+                    subtitle: 'عبدالولي بازل - 778447779',
                     color: Colors.blue,
                     onTap: () async {
                       final Uri emailUri = Uri(

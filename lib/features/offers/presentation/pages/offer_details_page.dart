@@ -214,7 +214,7 @@ class _OfferDetailsPageState extends State<OfferDetailsPage> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/products');
+                          Navigator.pushNamed(context, AppConfig.productsListRoute);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppTheme.primaryPink,
