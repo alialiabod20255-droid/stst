@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/widgets/bottom_navigation_bar.dart';
 import '../../../../core/providers/navigation_provider.dart';
+import '../../../../core/providers/app_providers.dart';
 import '../../../home/presentation/pages/home_page.dart';
 import '../../../cart/presentation/pages/cart_page.dart';
 import '../../../offers/presentation/pages/offers_page.dart';
@@ -14,10 +15,10 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<NavigationProvider>(
-      builder: (context, navigationProvider, child) {
-        return Scaffold(
-          body: IndexedStack(
+    return Scaffold(
+      body: Consumer<NavigationProvider>(
+        builder: (context, navigationProvider, child) {
+          return IndexedStack(
             index: navigationProvider.currentIndex,
             children: const [
               HomePage(),
@@ -26,10 +27,10 @@ class MainPage extends StatelessWidget {
               SearchPage(),
               ProfilePage(),
             ],
-          ),
-          bottomNavigationBar: const CustomBottomNavigationBar(),
-        );
-      },
+          );
+        },
+      ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }

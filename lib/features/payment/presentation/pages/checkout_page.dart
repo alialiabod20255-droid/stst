@@ -9,6 +9,9 @@ import '../../../orders/presentation/providers/orders_provider.dart';
 import '../../../addresses/presentation/providers/addresses_provider.dart';
 import '../../../payment/presentation/providers/payment_provider.dart';
 
+// Add AddressModel import
+import '../../../addresses/presentation/providers/addresses_provider.dart' show AddressModel;
+
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
 

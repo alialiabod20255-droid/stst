@@ -19,6 +19,12 @@ import '../../features/offers/presentation/pages/offers_page.dart';
 import '../../features/search/presentation/pages/search_page.dart';
 
 // Import pages that are created dynamically
+import '../../features/vendor/presentation/pages/vendor_orders_page.dart';
+import '../../features/vendor/presentation/pages/vendor_analytics_page.dart';
+import '../../features/profile/presentation/pages/about_page.dart';
+import '../../features/profile/presentation/pages/help_page.dart';
+import '../../features/notifications/presentation/pages/notification_settings_page.dart';
+import '../../features/support/presentation/pages/ticket_details_page.dart';
 import '../../features/profile/presentation/pages/edit_profile_page.dart';
 import '../../features/vendor/presentation/pages/add_product_page.dart';
 import '../../features/vendor/presentation/pages/manage_products_page.dart';
